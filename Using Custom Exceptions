@@ -1,0 +1,8 @@
+from exceptions import ResourceNotFoundException, UnauthorizedException
+
+@app.get("/secure-data")
+async def secure_data(token: str | None = None):
+    if token != "secret-token":
+        raise UnauthorizedException()
+
+    return {"data": "Very secure information"}
